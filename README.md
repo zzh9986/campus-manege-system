@@ -1,11 +1,15 @@
-# campus-manage-system 基于疫情防控下的校园人员管理系统
+# campus-manage-system
 
-> Campus personnel management system under epidemic situation
+> 基于疫情防控下的校园人员管理系统 Campus personnel management system under epidemic situation
 
 ## 项目背景
-> 该项目作为zhow的毕设项目，旨在为学生和教师提供一个日常管理平台，欢迎对本项目有兴趣 or 有疑问的小伙伴们前来询问。 微信：zhowCheung
+``` bash
+> 该项目作为zhow的毕设项目，旨在为学生和教师提供一个日常管理平台。
+> 欢迎对本项目有兴趣 or 有疑问的小伙伴们前来询问。 微信：zhowCheung;
+> 因为在实习中完成该毕设，所以某些设计不合理的地方请忽略;
 > 学生端：打卡、请假、查看通知...
 > 教师端：可视化大屏、查看请假打卡数据、发布通知...
+```
 
 ## Build Setup
 
