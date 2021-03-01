@@ -3,16 +3,16 @@
         <div class="login-wrapper">
             <p class="system-login-title">i&nbsp;校园管理系统</p>
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="90px" class="system-rule-form">
-                <el-form-item label="学号/工号" prop="stunum" required>
-                    <el-input v-model="ruleForm.stunum"></el-input>
+                <el-form-item label="学号/工号" prop="account" required>
+                    <el-input v-model="ruleForm.account"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="pass" required class="form-pwd-box">
                     <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="用户角色" prop="resource" class="form-user-type">
                     <el-radio-group v-model="ruleForm.resource">
-                    <el-radio label="学生"></el-radio>
-                    <el-radio label="教师"></el-radio>
+                    <el-radio label="student">学生</el-radio>
+                    <el-radio label="teacher">教师</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item class="form-btn-group">
@@ -26,20 +26,21 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
   name: 'App',
   data() {
     return {
         ruleForm: {
             pass: '',
-            stunum: '',
+            account: '',
             resource: ''
         },
         rules: {
             pass: [
                 { required: true, message: '请输入密码', trigger: 'blur' }
             ],
-            stunum: [
+            account: [
                 { required: true, message: '请输入学号/工号', trigger: 'blur' }
             ],
             resource: [
@@ -52,12 +53,37 @@ export default {
     submitForm(formName) {
         this.$refs[formName].validate((valid) => {
             if (valid) {
-                const loginValue = this.$refs[formName].model
-                if (loginValue.resource === '学生') {
+                const form_value = this.$refs[formName].model
+                // console.log("loginValue", loginValue)
+                if (form_value.resource === 'student') {
                     this.$router.push({ path: '/student' });
                 } else {
                     this.$router.push({ path: '/teacher' });
                 }
+                axios({
+                    method:'post',
+                    url:'http://192.168.0.103:5000/login',
+                    data: {
+                        form_value
+                    }
+                }).then(function(resp){
+                    console.log(resp.data);
+                    // 登陆成功
+                    if (resp.data.status === 1) {
+                        if (loginValue.resource === 'student') {
+                            this.$router.push({ path: '/student' });
+                        } else {
+                            this.$router.push({ path: '/teacher' });
+                        }
+                    } else {
+                        //  登录失败原因
+                        this.$message.error(resp.data.msg)
+                    }
+                    
+                }).catch(resp => {
+                    console.log('请求失败：'+resp.data.status);
+                });
+                
             } else {
                 return false;
             }

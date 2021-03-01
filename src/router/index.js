@@ -7,6 +7,9 @@ import Teacher from '@/components/teacher'
 import Absence from '@/components/studentSide/absence'
 import Record from '@/components/studentSide/record'
 import Notice from '@/components/studentSide/notice'
+import SendNotice from '@/components/teacherSide/sendNotice'
+import AbsenceDetail from '@/components/teacherSide/absenceDetail'
+import RecordDetail from '@/components/teacherSide/recordDetail'
 
 Vue.use(Router)
 
@@ -52,6 +55,21 @@ export default new Router({
       path: '/teacher',
       name: 'teacher',
       component: Teacher
+    },
+    {
+      path: '/send_notice',
+      name: 'send',
+      component: SendNotice
+    },
+    {
+      path: '/absence_detail',
+      name: 'takeoff',
+      component: AbsenceDetail
+    },
+    {
+      path: '/record_detail',
+      name: 'location',
+      component: RecordDetail
     }
   ]
 })

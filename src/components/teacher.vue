@@ -3,15 +3,15 @@
         <div class="visual-header">
             <div class="visual-header-left">
                 <ul class="left-ul">
-                    <li>教师管理</li>
-                    <li>发布通知</li>
+                    <li id="teacher" @click="pathJump('')">系统概览</li>
+                    <li @click="pathJump('/send_notice')">发布通知</li>
                 </ul>
             </div>
             <dv-decoration-11 class="center-title">i&nbsp;校园教师管理端</dv-decoration-11>
             <div class="visual-header-right">
                 <ul class="right-ul">
-                    <li>教师管理</li>
-                    <li>发布通知</li>
+                    <li @click="pathJump('/absence_detail')">请假详情</li>
+                    <li @click="pathJump('/record_detail')">打卡详情</li>
                 </ul>
             </div>
         </div>
@@ -23,29 +23,26 @@
 
                     </div>
                 </dv-border-box-1>
+                <dv-border-box-1 class="left-bottom">
+                    <p class="top-left-title">打卡地点占比</p>
+                    <dv-conical-column-chart class="record-position" :config="percent"/>
+                </dv-border-box-1>
             </div>
             <div class="visual-middle">
-                <div id="info" :style="{width: '700px', height: '700px'}"></div>
+                <div id="info" :style="{width: '50%', height: '90%'}"></div>
             </div>
             <div class="visual-right">
                 <dv-border-box-1 class="right-top">
                     <p class="top-left-title">请假人数排名</p>
                     <dv-scroll-ranking-board class="ranking-board" :config="configs"/>
-                    <!-- <div id="campus">
-
-                    </div> -->
                 </dv-border-box-1>
                 <dv-border-box-1 class="right-bottom">
-                    <p class="top-left-title">疫情新闻</p>
-                    <dv-scroll-board :config="news" style="width:300px;height:320px" />
+                    <p class="top-left-title">打卡情况</p>
+                    <div id="record"></div>
                 </dv-border-box-1>
             </div>
         </div>
-        <dv-capsule-chart :config="config" style="width:440px;height:250px" />
-        <div id="myChart" :style="{width: '300px', height: '300px', display: 'none'}"></div>
-        
     </div>
-    
 </template>
 
 <script>
@@ -55,33 +52,6 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      config: {
-          data: [
-            {
-              name: '计科1704班',
-              value: 167
-            },
-            {
-              name: '计科1701班',
-              value: 123
-            },
-            {
-              name: '计科1708班',
-              value: 98
-            },
-            {
-              name: '计科1703班',
-              value: 75
-            },
-            {
-              name: '计科1705班',
-              value: 66
-            },
-          ],
-          colors: ['#37a2da', '#32c5e9', '#67e0e3', '#9fe6b8', '#ffdb5c'],
-          unit: '请假人数',
-          showValue: true
-      },
         information: {},
         configs: {
             data: [
@@ -91,7 +61,7 @@ export default {
             },
             {
               name: '计科1704班',
-              value: 120
+              value: 70
             },
             {
               name: '计科1706班',
@@ -115,45 +85,91 @@ export default {
             }
         ]
         },
-        news: {
+        numbers: {
             data: [
-                ['就很水大V好女孩需更换过回电话'],
-                ['就很水大V好女孩需更换过回电话'],
-                ['就很水大V好女孩需更换过回电话'],
-                ['就很水大V好女孩需更换过回电话'],
-                ['就很水大V好女孩需更换过回电话'],
-                ['就很水大V好女孩需更换过回电话'],
-                ['就很水大V好女孩需更换过回电话']
-            ]
+                {
+                  name: '陕西西安',
+                  value: 167
+                },
+                {
+                  name: '北京海淀',
+                  value: 123
+                },
+                {
+                  name: '陕西宝鸡',
+                  value: 98
+                },
+                {
+                  name: '东北哈尔滨',
+                  value: 75
+                },
+                {
+                  name: '海南省三亚市',
+                  value: 66
+                },
+                {
+                  name: '成都',
+                  value: 66
+                }
+            ],
+            colors: ['#e062ae', '#fb7293', '#e690d1', '#32c5e9', '#96bfff'],
+            unit: '人数',
+            showValue: true
+        },
+        percent: {
+            data: [
+                {
+                  name: '宝鸡',
+                  value: 55
+                },
+                {
+                  name: '西安',
+                  value: 120
+                },
+                {
+                  name: '北京',
+                  value: 71
+                },
+                {
+                  name: '驻马店',
+                  value: 66
+                },
+                {
+                  name: '沈阳',
+                  value: 80
+                },
+                {
+                  name: '三亚',
+                  value: 35
+                },
+                {
+                  name: '银川',
+                  value: 15
+                }
+            ],
+            img: [
+              'http://datav.jiaminghi.com/img/conicalColumnChart/1st.png',
+              'http://datav.jiaminghi.com/img/conicalColumnChart/2st.png',
+              'http://datav.jiaminghi.com/img/conicalColumnChart/3st.png',
+              'http://datav.jiaminghi.com/img/conicalColumnChart/4st.png',
+              'http://datav.jiaminghi.com/img/conicalColumnChart/5st.png',
+              'http://datav.jiaminghi.com/img/conicalColumnChart/6st.png',
+              'http://datav.jiaminghi.com/img/conicalColumnChart/7st.png'
+            ],
+            showValue: true
         }
     }
   },
   mounted() {
+      const routeName = this.$router.app._route.name
+      const ele = document.getElementById(routeName)
+      ele.style.background = '#7bbfea'
       this.information = echartsData.options
-      this.drawLine();
       this.drawMap();
       this.drawAbsencePie();
       this.drawCampus();
   },
   methods: {
-      drawLine(){
-          // 基于准备好的dom，初始化echarts实例
-          let myChart = this.$echarts.init(document.getElementById('myChart'))
-          // 绘制图表
-          myChart.setOption({
-              title: { text: '在Vue中使用echarts' },
-              tooltip: {},
-              xAxis: {
-                  data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-              },
-              yAxis: {},
-              series: [{
-                  name: '销量',
-                  type: 'bar',
-                  data: [5, 20, 36, 10, 10, 20]
-              }]
-          });
-      },
       drawMap() {
         var myChart = this.$echarts.init(document.getElementById('info'));
         const option = {
@@ -167,6 +183,7 @@ export default {
             },
             visualMap: {
                 type: 'piecewise',
+                left: '6%',
                 textStyle: {
                     color: '#fff'
                 },
@@ -296,9 +313,10 @@ export default {
                       data: [
                           {value: 1048, name: '计科1706班', itemStyle: {color: '#ee6666'}},
                           {value: 735, name: '计科1701班', itemStyle: {color: '#73c0de'}},
-                          {value: 580, name: '计科1708班', itemStyle: {color: '#5470c6'}},
+                          {value: 580, name: '计科1705班', itemStyle: {color: '#5470c6'}},
                           {value: 484, name: '计科1704班', itemStyle: {color: '#91cb76'}},
-                          {value: 300, name: '计科1703班', itemStyle: {color: '#fac858'}}
+                          {value: 300, name: '计科1702班', itemStyle: {color: '#fc8451'}},
+                          {value: 300, name: '计科1703班', itemStyle: {color: '#9a60b4'}}
                       ],
                       emphasis: {
                           itemStyle: {
@@ -312,46 +330,86 @@ export default {
           })
       },
       drawCampus() {
-          let myCampus = this.$echarts.init(document.getElementById('campus'))
-          myCampus.setOption({
-              dataset: {
-                source: [
-                    ['score', 'amount', 'product'],
-                    [89.3, 20, 'Matcha Latte'],
-                    [57.1, 12, 'Milk Tea'],
-                    [50.1, 17, 'Cheese Brownie'],
-                    [89.7, 29, 'Matcha Cocoa'],
-                    [68.1, 30, 'Tea'],
-                    [32.7, 22, 'Walnut Brownie']
-                ]
-              },
-              grid: {containLabel: true},
-              xAxis: {name: 'amount'},
-              yAxis: {type: 'category'},
-              visualMap: {
-                  orient: 'horizontal',
-                  left: 'center',
-                  min: 10,
-                  max: 100,
-                  text: ['High Score', 'Low Score'],
-                  // Map the score column to color
-                  dimension: 0,
-                  inRange: {
-                      color: ['#65B581', '#FFCE34', '#FD665F']
-                  }
-              },
-              series: [
-                  {
-                      type: 'bar',
-                      encode: {
-                          // Map the "amount" column to X axis.
-                          x: 'amount',
-                          // Map the "product" column to Y axis
-                          y: 'product'
+          let myRecord = this.$echarts.init(document.getElementById('record'))
+          myRecord.setOption({
+              xAxis: {
+                  type: 'category',
+                  data: ['01班', '02班', '03班', '04班', '05班', '06班'],
+                  axisLine: {
+                      lineStyle: {
+                          color: '#fff'
                       }
+                  },
+              },
+              yAxis: {
+                  type: 'value',
+                  name: '人数',
+                  axisLine: {
+                      lineStyle: {
+                          color: '#fff'
+                      }
+                  },
+                  splitLine: {
+                      show: false
                   }
-              ]
+              },
+              series: [{
+                  data: [
+                      {
+                          value: 20,
+                          itemStyle: {
+                              color: '#ee6666'
+                          }
+                      },
+                      {
+                          value: 25,
+                          itemStyle: {
+                              color: '#73c0de'
+                          }
+                      },
+                      {
+                          value: 32,
+                          itemStyle: {
+                              color: '#5470c6'
+                          }
+                      },
+                      {
+                          value: 38,
+                          itemStyle: {
+                              color: '#91cb76'
+                          }
+                      },
+                      {
+                          value: 40,
+                          itemStyle: {
+                              color: '#fc8451'
+                          }
+                      },
+                      {
+                          value: 35,
+                          itemStyle: {
+                              color: '#9a60b4'
+                          }
+                      }
+                  ],
+                  type: 'bar',
+                  itemStyle: {
+                      normal: {
+                          label: {
+                              show: true, //开启显示
+                              position: 'top', //在上方显示
+                              textStyle: { //数值样式
+                                  color: '#fff',
+                                  fontSize: 16
+                              }
+                          }
+							        }
+                  }
+              }]
           })
+      },
+      pathJump(path) {
+          this.$router.push({ path })
       }
   }
 }
@@ -364,13 +422,13 @@ body {
 }
 #info {
     position: absolute;
-    top: 6px;
+    top: 26px;
 }
 .visual-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 90px;
+    padding: 5px 90px;
 }
 .visual-header-left {
     display: inline-block;
@@ -382,10 +440,13 @@ body {
 }
 .center-title {
     font-size: 20px;
-    color: #fafafa;
+    color: #92e3ff;
     display: inline-block;
     width: 280px;
     height: 70px;
+    /* color: #94d6da; */
+    overflow-wrap: break-word;
+    text-shadow: 5px 2px 3px rgb(0 112 192);
 }
 .left-ul {
     list-style: none;
@@ -395,6 +456,11 @@ body {
     display: inline-block;
     padding: 0 50px;
     cursor: pointer;
+    width: 68px;
+    height: 33px;
+    text-align: center;
+    line-height: 33px;
+    border-radius: 10px;
 }
 .right-ul {
     list-style: none;
@@ -404,6 +470,11 @@ body {
     display: inline-block;
     padding: 0 50px;
     cursor: pointer;
+    width: 68px;
+    height: 33px;
+    text-align: center;
+    line-height: 33px;
+    border-radius: 10px;
 }
 .main-box {
     display: flex;
@@ -427,7 +498,7 @@ body {
     /* background: darkgoldenrod; */
 }
 .top-left-title {
-    color: #94d6da;
+    color: #92e3ff;
     font-size: 15px;
     font-weight: bold;
     margin: 0;
@@ -437,28 +508,55 @@ body {
 }
 .left-top {
     width: 100%;
-    height: 300px;
+    height: 40%;
     margin-top: 30px;
 }
 .right-top {
     width: 100%;
-    height: 300px;
+    height: 40%;
     margin-top: 30px;
 }
 .ranking-board {
-    width: 300px;
+    width: 85%;
     height: 270px;
     position: absolute;
-    left: 30px;
+    left: 8%;
+    top: 15%;
 }
 #absence {
-    width: 390px;
+    width: 100%;
     height: 280px;
-    left: 26px;
+    left: 3%;
+    top: 11%;
+    /* left: 26px; */
 }
 #campus {
     width: 390px;
     height: 280px;
+}
+#record {
+    width: 100%;
+    height: 100%;
+    /* margin-top: 10%;
+    margin-left: 8%; */
+    /* margin: 10px 0 0 10px; */
+}
+.left-bottom {
+    width: 100%;
+    height: 40%;
+    margin-top: 40px;
+}
+.record-position {
+    width: 90%;
+    height: 80%;
+    margin-top: 5%;
+    margin-left: 6%;
+    /* margin: 49px 0 0 18px; */
+}
+.right-bottom {
+    width: 100%;
+    height: 40%;
+    margin-top: 40px;
 }
 .teacher-all-data {
     position: absolute;
