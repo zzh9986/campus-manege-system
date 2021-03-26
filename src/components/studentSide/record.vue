@@ -18,8 +18,8 @@
                 <div class="record-line" :style="{marginTop: '30px'}">
                     <div>
                         <p class="type-title">3、您目前是否处于居家隔离？</p>
-                        <el-form-item prop="resource">
-                            <el-radio-group :style="{marginLeft: '-54px'}" v-model="ruleForm.resource">
+                        <el-form-item prop="selection">
+                            <el-radio-group :style="{marginLeft: '-54px'}" v-model="ruleForm.selection">
                                 <el-radio label="是"></el-radio>
                                 <el-radio label="否"></el-radio>
                             </el-radio-group>
@@ -52,7 +52,7 @@ export default {
             ruleForm: {
                 temp: '',
                 type: [],
-                resource: ''
+                selection: ''
             },
             dragData: {},
             currentPosition: [],
@@ -88,9 +88,12 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
-                // alert('submit!');
                 const recordValue = this.$refs["ruleForm"].model
                 console.log("recordValue---", recordValue)
+                this.$message({
+                    message: '成功~ 今日打卡数据已提交',
+                    type: 'success'
+                })
             } else {
                 console.log('error submit!!');
                 return false;

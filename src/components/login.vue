@@ -122,14 +122,12 @@ export default {
     flex-direction: row;
     justify-content: center;
     min-height: 650px;
-    /* background-attachment: fixed; */
 }
 .login-wrapper {
     width: 430px;
     height: 450px;
     position: relative;
     top: 180px;
-    /* right: 90px; */
     background-color: #fcfcfc;
     border-radius: 10px;
     box-shadow: 0 10px 40px rgb(255 255 255 / 32%);
@@ -153,19 +151,11 @@ export default {
     border-color: #3164e4;
     margin: 35px 0 0 50px;
 }
-/* .form-login-btn:hover {
-    background-color: #3164e4;
-    color: #fff;
-} */
 .form-clear-btn {
     color: #606266;
     background-color: #fff;
     margin-left: 40px!important;
 }
-/* .form-clear-btn:hover {
-    background-color: #fff;
-    color: #606266;
-} */
 .form-goto-regis {
     color: #484852;
     text-align: center;

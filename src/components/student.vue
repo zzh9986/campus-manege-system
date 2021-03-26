@@ -11,15 +11,15 @@
         </div>
         <div class="student-sider">
             <ul class="student-sider-ul">
-                <li @click="pathClick('record')">
+                <li id="record" @click="pathClick('record')">
                     <i class="el-icon-message-solid sider-icon"></i>
                     <p class="sider-font">每日打卡</p>
                 </li>
-                <li class="student-sider-li" @click="pathClick('absence')">
+                <li id="absence" class="student-sider-li" @click="pathClick('absence')">
                     <i class="el-icon-s-order sider-icon"></i>
                     <p class="sider-font">请假申请</p>
                 </li>
-                <li class="student-sider-li" @click="pathClick('notice')">
+                <li id="notice" class="student-sider-li" @click="pathClick('notice')">
                     <i class="el-icon-s-promotion sider-icon"></i>
                     <p class="sider-font">查看通知</p>
                 </li>
@@ -40,8 +40,17 @@ export default {
         
         }
     },
+    mounted() {
+        const routeName = this.$router.app._route.name
+        console.log("routeName", routeName)
+    },
     methods: {
         pathClick(name) {
+            
+            // const ele = document.getElementById(name)
+            // if (routeName === name) {
+            //     ele.style.color = 'rgb(123, 191, 234)'
+            // }
             this.$router.push({
                 name
             })
@@ -58,7 +67,9 @@ export default {
 .student-header {
     width: 100%;
     height: 90px;
-    background-color: #02196b;
+    background: url("../assets/sider.png");
+    background-size: 100%;
+    /* background-color: #02196b; */
     display: flex;
     align-items: center;
 }
@@ -67,7 +78,8 @@ export default {
     height: 100%;
     position: absolute;
     top: 90px;
-    background-color: #02196b;
+    /* background-color: #02196b; */
+    background: url("../assets/sider.png");
 }
 .student-left-logo {
     position: absolute;
@@ -107,12 +119,12 @@ export default {
 .header-right {
     width: 300px;
     height: 80px;
+    line-height: 80px;
     position: absolute;
     right: 0;
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
-    padding-bottom: 32px;
 }
 .user-name {
     color: #fafafa;

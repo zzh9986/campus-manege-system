@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="visual-content">
-            <div class="condition-area">
+            <!-- <div class="condition-area">
                 <p class="query-date">选择查询请假数据日期：（默认展示当天请假数据）</p>
                 <el-form ref="formInline" :inline="true" :model="formInline" class="demo-form-inline">
                     <el-form-item>
@@ -33,10 +33,13 @@
                         <el-button type="primary" @click="onSubmit('formInline')">查询</el-button>
                     </el-form-item>
                 </el-form>
-            </div>
+            </div> -->
             <div class="absence-data">
                 <el-table
                     :data="tableData"
+                    height="700"
+                    :header-cell-style="{textAlign: 'center'}"
+                    :cell-style="{ textAlign: 'center' }"
                     stripe
                     style="width: 100%">
                         <el-table-column
@@ -55,7 +58,7 @@
                         <el-table-column
                             prop="date"
                             label="请假日期"
-                            width="200">
+                            width="260">
                         </el-table-column>
                         <el-table-column
                             prop="direction"
@@ -66,6 +69,14 @@
                             prop="phone"
                             label="联系电话"
                             width="180">
+                        </el-table-column>
+                        <el-table-column label="操作">
+                            <template slot-scope="scope">
+                                <el-button
+                                size="mini"
+                                type="primary"
+                                @click.native.prevent="deleteRow(scope.$index, tableData)">销假</el-button>
+                            </template>
                         </el-table-column>
                 </el-table>
             </div>
@@ -83,23 +94,117 @@ export default {
         },
         tableData: [{
             date: '2016-05-02 - 2021-07-08',
-            name: 'zhow',
+            name: '张子豪',
             major: '计算机科学与技术1701班',
             direction: '长安医院',
             phone: '15902927679'
         }, {
             date: '2016-05-02 - 2021-07-08',
-            name: 'zhow',
+            name: '王一二',
             major: '计算机科学与技术1701班',
             direction: '长安医院',
             phone: '15902927679'
         }, {
             date: '2016-05-02 - 2021-07-08',
-            name: 'zhow',
+            name: '李五六',
             major: '计算机科学与技术1701班',
             direction: '长安医院',
             phone: '15902927679'
         }, {
+            date: '2016-05-02 - 2021-07-08',
+            name: '七八九',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },
+        {
+            date: '2016-05-02 - 2021-07-08',
+            name: '一二三',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },
+        {
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },
+        {
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },
+        {
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
+            date: '2016-05-02 - 2021-07-08',
+            name: 'zhow',
+            major: '计算机科学与技术1701班',
+            direction: '长安医院',
+            phone: '15902927679'
+        },{
             date: '2016-05-02 - 2021-07-08',
             name: 'zhow',
             major: '计算机科学与技术1701班',
@@ -127,16 +232,23 @@ export default {
                     return false;
                 }
             });
+      },
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
       }
   }
 }
 </script>
 
 <style scoped>
+.el-table__body tr:hover>td {
+		background-color: #7bbfea!important;
+	}
 .absence-data {
-    width: 66%;
+    width: 77%;
     position: absolute;
-    top: 35%;
+    top: 20%;
+    padding-bottom: 20px;
 }
 body {
     margin: 0;

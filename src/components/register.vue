@@ -109,6 +109,11 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             const form_value = this.$refs.ruleForm.model;
+            this.$message({
+                message: '恭喜，注册成功，请登录~',
+                type: 'success'
+            })
+            this.$router.push({ path: '/' });
             console.log("注册value", form_value)
             axios({
                 method:'post',

@@ -54,8 +54,13 @@ export default {
                     trigger: 'item'
                 },
                 legend: {
-                    top: '5%',
-                    left: 'center'
+                    top: '40%',
+                    left: '5%',
+                    textStyle: { //图例文字的样式
+                        color: '#fafafa',
+                        fontSize: 13
+                    },
+                    orient: 'vertical'
                 },
                 series: [
                     {
@@ -75,7 +80,7 @@ export default {
                         emphasis: {
                             label: {
                                 show: true,
-                                fontSize: '20',
+                                fontSize: '25',
                                 fontWeight: 'bold'
                             }
                         },
@@ -105,7 +110,7 @@ export default {
     height: 100%;
 }
 .record-number {
-    width: 37%;
+    width: 32%;
     height: 40%;
     position: absolute;
     left: 5%;

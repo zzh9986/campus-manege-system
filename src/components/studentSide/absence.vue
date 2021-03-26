@@ -87,6 +87,10 @@ import info from '../../static/data'
                 if (valid) {
                     const absenceValue = this.$refs[formName].model
                     console.log("请假数据", absenceValue);
+                    this.$message({
+                        message: '已成功请假~ 请记得及时销假',
+                        type: 'success'
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;
